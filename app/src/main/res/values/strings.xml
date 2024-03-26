@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NotePadProject</string>
+    <string name="inputLoginAndPassword">Введите логин и пароль</string>
+    <string name="inputLoginHint">Введите логин</string>
+    <string name="inputPasswordHint">Введите пароль</string>
+    <string name="permitBtn">Подтвердить</string>
+</resources>
