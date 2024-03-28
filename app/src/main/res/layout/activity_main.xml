@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Background"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -20,34 +21,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Введите логин и пароль"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/Text"
+            android:layout_margin="10dp"
+            android:textSize="20dp"/>
 
         <EditText
             android:id="@+id/inputLoginET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:allowUndo="false"
             android:ems="10"
             android:hint="@string/inputLoginHint"
-            android:inputType="text" />
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:singleLine="false"
+            android:visibility="visible"
+            android:background="@drawable/style_et"
+            android:layout_margin="10dp" />
 
         <EditText
             android:id="@+id/inputPassET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:gravity="center"
             android:hint="@string/inputPasswordHint"
-            android:inputType="text" />
+            android:inputType="textPassword"
+            android:background="@drawable/style_et"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/passVerification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Text"
+            android:layout_margin="5dp"/>
 
         <Button
             android:id="@+id/authorizationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Авторизация" />
+            android:backgroundTint="@color/BackgroundElements"
+            android:text="Авторизация"
+            android:textColor="@color/TextElements"
+            android:layout_margin="5dp"
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/registrationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Регистрация" />
+            android:backgroundTint="@color/BackgroundElements"
+            android:text="Регистрация"
+            android:textColor="@color/TextElements"
+            android:layout_margin="5dp"
+            android:textSize="16dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

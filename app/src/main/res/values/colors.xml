@@ -2,4 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="Text">#000000</color>
+    <color name="Background">#F7DED0</color>
+
+
+    <color name="BackgroundElements">#FB6D48</color>
+    <color name="TextElements">#FFEDD8</color>
+
+
+    <color  name="StrokeET">#F6A05E</color>
+    <color name="StartGradientET">#DCDCDC</color>
+    <color name="EndGradientET">#FFFFFF</color>
+
 </resources>
