@@ -4,16 +4,17 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="Text">#000000</color>
-    <color name="Background">#F7DED0</color>
+    <color name="Text">#FFFFFF</color>
+    <color name="Background">#212529</color>
 
 
-    <color name="BackgroundElements">#FB6D48</color>
-    <color name="TextElements">#FFEDD8</color>
+    <color name="BackgroundElements">#343A40</color>
+    <color name="TextElements">#FFFFFF</color>
+    <color name="TextHint">#808080</color>
 
 
-    <color  name="StrokeET">#F6A05E</color>
-    <color name="StartGradientET">#DCDCDC</color>
-    <color name="EndGradientET">#FFFFFF</color>
+    <color  name="StrokeET">#8338EC</color>
+    <color name="StartGradientET">#343a40</color>
+    <color name="EndGradientET">#343a40</color>
 
 </resources>

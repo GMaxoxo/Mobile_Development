@@ -38,6 +38,8 @@
             android:singleLine="false"
             android:visibility="visible"
             android:background="@drawable/style_et"
+            android:textColor="@color/Text"
+            android:textColorHint="@color/TextHint"
             android:layout_margin="10dp" />
 
         <EditText
@@ -49,6 +51,8 @@
             android:hint="@string/inputPasswordHint"
             android:inputType="textPassword"
             android:background="@drawable/style_et"
+            android:textColor="@color/Text"
+            android:textColorHint="@color/TextHint"
             android:layout_margin="10dp" />
 
         <TextView

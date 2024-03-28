@@ -72,11 +72,22 @@ public class MainActivity extends AppCompatActivity {
 
     // Метод обработчика нажатий
     private void setOnClickListeners() {
-        // Обработчк регистрации
-        registrationBtn.setOnClickListener((v -> {
-                    saveData();
-                })
-        );
+
+        String loginNotEmpty = inputLoginET.getText().toString();
+        String passwordNotEmpty = inputPassET.getText().toString();
+
+        // Проверяем, что и логин, и пароль не пустые
+        if (loginNotEmpty.isEmpty() || passwordNotEmpty.isEmpty()) {
+            return;
+        } else {
+            // Обработчк регистрации
+            registrationBtn.setOnClickListener((v -> {
+                saveData();
+            })
+            );
+        }
+
+
         // Обработчк авторизации
         authorizationBtn.setOnClickListener((v -> {
                     loadData();
@@ -110,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         if (inputLoginET.getText().toString().equals(login)  // перекидывает на новое окно
                 && inputPassET.getText().toString().equals(password)) {
             startActivity(new Intent(this, SecondActivity.class));
+            overridePendingTransition(0, 0); // Убирает анимки
         } else {        // выдаёт ошибку
             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
         }
@@ -118,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Proverka() {
+
+
+
         // Получаем пароль
         String password = inputPassET.getText().toString();
 
@@ -153,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             // Отчёт об ошибке
-            passReport += "Пароль должен содержать минимум 8 символов. Также он должен содержать как минимум одну цифру и заглавную букву!";
+            passReport += "Пароль должен содержать минимум 8 символов. Также он должен содержать как минимум одну цифру и заглавную букву";
                 failregistration();
             }
 
@@ -166,12 +181,11 @@ public class MainActivity extends AppCompatActivity {
     // Показ неудачной регистрации
     private void failregistration() {
         registrationBtn.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "Требования к паролю не соблюдены", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Пароль не введён по требованиям", Toast.LENGTH_SHORT).show();
         });
     }
 
 }
-
 
 
 

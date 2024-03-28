@@ -39,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
     // Метод навигации
     private void setUpBottomNavBar(){
         bottomNavigationView.setBackground(null); // Убираем фон нижнего меню
+        bottomNavigationView.setSelectedItemId(R.id.miSettings); // Начальный выбор кнопки
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -46,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.miHome){
                     startActivity(new Intent( SettingsActivity.this,SecondActivity.class));
-                    overridePendingTransition(0, 0);
+                    overridePendingTransition(0, 0); // Убирает анимки
                 } else {
 
                 }

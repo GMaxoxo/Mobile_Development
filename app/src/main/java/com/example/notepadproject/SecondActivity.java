@@ -25,6 +25,7 @@ public class SecondActivity extends AppCompatActivity {
 
     //Меню навигации
     BottomNavigationView bottomNavigationView;
+
     // Кнопка в навигации
     FloatingActionButton fabBtn;
 
@@ -49,6 +50,7 @@ public class SecondActivity extends AppCompatActivity {
     // Метод навигации
     private void setUpBottomNavBar(){
         bottomNavigationView.setBackground(null); // Убираем фон нижнего меню
+        bottomNavigationView.setSelectedItemId(R.id.miHome); // Начальный выбор кнопки
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -62,8 +64,9 @@ public class SecondActivity extends AppCompatActivity {
                 }
 
                 if (menuItem.getItemId() == R.id.miSettings){
+
                     startActivity(new Intent( SecondActivity.this,SettingsActivity.class));
-                    overridePendingTransition(0, 0);
+                    overridePendingTransition(0, 0); // Убирает анимки
                 } else {
 
                 }
