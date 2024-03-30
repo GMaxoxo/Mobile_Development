@@ -14,11 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
-
-    private TextView inputLoginAndPasswordTV;
 
     private EditText inputLoginET;
 
@@ -62,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Метод Инициализации
     private void init() {
-        inputLoginAndPasswordTV = findViewById(R.id.inputLoginAndPasswordTV);
         inputLoginET = findViewById(R.id.inputLoginET);
         inputPassET = findViewById(R.id.inputPassET);
         registrationBtn = findViewById(R.id.registrationBtn);
@@ -81,18 +76,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else {
             // Обработчк регистрации
-            registrationBtn.setOnClickListener((v -> {
-                saveData();
-            })
+            registrationBtn.setOnClickListener((v -> saveData())
             );
         }
 
 
         // Обработчк авторизации
-        authorizationBtn.setOnClickListener((v -> {
-                    loadData();
-                })
-        );
+        authorizationBtn.setOnClickListener( v -> loadData() );
 
     }
 
@@ -125,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
         } else {        // выдаёт ошибку
             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
         }
-        //  inputLoginAndPasswordTV.setText(login + " " + password);
-        // как-будто можно убрать уже + в инициализации
+
     }
 
     private void Proverka() {
@@ -180,9 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Показ неудачной регистрации
     private void failregistration() {
-        registrationBtn.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "Пароль не введён по требованиям", Toast.LENGTH_SHORT).show();
-        });
+        registrationBtn.setOnClickListener( v -> Toast.makeText(getApplicationContext(), "Пароль не введён по требованиям", Toast.LENGTH_SHORT).show() );
     }
 
 }

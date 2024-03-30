@@ -48,6 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.miHome){
                     startActivity(new Intent( SettingsActivity.this,SecondActivity.class));
                     overridePendingTransition(0, 0); // Убирает анимки
+                    finish();
                 } else {
 
                 }
