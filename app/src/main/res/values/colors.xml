@@ -4,17 +4,6 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="Text">#FFFFFF</color>
-    <color name="Background">#212529</color>
 
-
-    <color name="BackgroundElements">#343A40</color>
-    <color name="TextElements">#FFFFFF</color>
-    <color name="TextHint">#808080</color>
-
-
-    <color  name="StrokeET">#8338EC</color>
-    <color name="StartGradientET">#343a40</color>
-    <color name="EndGradientET">#343a40</color>
 
 </resources>

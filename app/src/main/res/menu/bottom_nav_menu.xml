@@ -2,16 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/miHome"
-        android:title="Home"
+        android:title="Заметки"
         android:icon="@drawable/baseline_home_24"/>
 
-
-    <item android:id="@+id/placeholder"
-        android:title=""
-        android:enabled="false"/>
-
+    <item android:id="@+id/miAdd"
+        android:title="Добавить"
+        android:icon="@drawable/baseline_add_24"/>
 
     <item android:id="@+id/miSettings"
-        android:title="Settings"
+        android:title="Настройки"
         android:icon="@drawable/baseline_settings_24"/>
+
+    <item android:id="@+id/miGroup"
+        android:title="Общие"
+        android:icon="@drawable/baseline_group_24"/>
 </menu>

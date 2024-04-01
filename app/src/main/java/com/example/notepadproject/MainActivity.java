@@ -53,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
     // Метод Инициализации
     private void init() {
         inputLoginET = findViewById(R.id.inputLoginET);
@@ -120,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void Proverka() {
 
-
-
         // Получаем пароль
         String password = inputPassET.getText().toString();
 
@@ -158,13 +153,12 @@ public class MainActivity extends AppCompatActivity {
 
             // Отчёт об ошибке
             passReport += "Пароль должен содержать минимум 8 символов. Также он должен содержать как минимум одну цифру и заглавную букву";
-                failregistration();
-            }
+            failregistration();
+        }
 
 
-            passVerification.setText(passReport);
+        passVerification.setText(passReport);
     }
-
 
 
     // Показ неудачной регистрации
@@ -173,7 +167,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-
-

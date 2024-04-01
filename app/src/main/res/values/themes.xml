@@ -11,5 +11,18 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <color name="Text">#000000</color>
+    <color name="Background">#FFFFFF</color>
+
+
+    <color name="BackgroundElements">#A86DFB</color>
+    <color name="TextElements">#000000</color>
+    <color name="TextHint">#252525</color>
+
+
+    <color  name="StrokeET">#A86DFB</color>
+    <color name="StartGradientET">#FFFFFF</color>
+    <color name="EndGradientET">#DFDFDF</color>
+
     <style name="Theme.NotePadProject" parent="Base.Theme.NotePadProject" />
 </resources>

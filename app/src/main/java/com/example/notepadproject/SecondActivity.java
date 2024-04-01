@@ -42,7 +42,6 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this); //Отображение по всему экрану
         setContentView(R.layout.activity_second);
 
         // Инициализация
@@ -57,22 +56,27 @@ public class SecondActivity extends AppCompatActivity {
     // Метод инициализации
     private void init(){
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        fabBtn = findViewById(R.id.fab);
     }
 
     // Метод навигации
     private void setUpBottomNavBar(){
-        bottomNavigationView.setBackground(null); // Убираем фон нижнего меню
         bottomNavigationView.setSelectedItemId(R.id.miHome); // Начальный выбор кнопки
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 // Обработчик нажатий кнопок
 
+                if (menuItem.getItemId() == R.id.miGroup) {
+
+                }
+
+                if (menuItem.getItemId() == R.id.miAdd) {
+                    showDialog();
+                }
 
                 if (menuItem.getItemId() == R.id.miSettings){
 
-                    startActivity(new Intent( SecondActivity.this,SettingsActivity.class));  // Переход на окно настроек
+                    startActivity(new Intent( SecondActivity.this, SettingsActivity.class));  // Переход на окно настроек
                     overridePendingTransition(0, 0); // Убирает анимки
                     finish();
                 } else {
@@ -82,8 +86,6 @@ public class SecondActivity extends AppCompatActivity {
 
             }
         });
-
-        fabBtn.setOnClickListener((v -> showDialog()));
 
 
         }
@@ -131,7 +133,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void addToRecyclerView(Note note) {
-        adapter.addElement(note);
+        adapter.addItem(note);
     }
 
 }
