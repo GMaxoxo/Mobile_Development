@@ -1,28 +1,18 @@
 package com.example.notepadproject;
 
-import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
@@ -33,9 +23,6 @@ public class SecondActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     RecyclerView recyclerView;
     NotesAdapter adapter;
-
-    // Кнопка в навигации
-    FloatingActionButton fabBtn;
 
     ArrayList<Note> notes = new ArrayList<>();
 
@@ -54,30 +41,25 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     // Метод инициализации
-    private void init(){
+    private void init() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
     }
 
     // Метод навигации
-    private void setUpBottomNavBar(){
-        bottomNavigationView.setSelectedItemId(R.id.miHome); // Начальный выбор кнопки
+    private void setUpBottomNavBar() {
+        bottomNavigationView.setBackground(null);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 // Обработчик нажатий кнопок
 
                 if (menuItem.getItemId() == R.id.miGroup) {
-
                 }
 
-                if (menuItem.getItemId() == R.id.miAdd) {
-                    showDialog();
-                }
-
-                if (menuItem.getItemId() == R.id.miSettings){
-
-                    startActivity(new Intent( SecondActivity.this, SettingsActivity.class));  // Переход на окно настроек
-                    overridePendingTransition(0, 0); // Убирает анимки
+                if (menuItem.getItemId() == R.id.miSettings) {
+                    Intent intent = new Intent(SecondActivity.this, SettingsActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
                     finish();
                 } else {
 
@@ -87,55 +69,35 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.notes_activity_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.miAdd) {
+            startActivity(new Intent(this, NoteActivity.class));
         }
-
-
-    private void showDialog() {
-        // Создаем диалоговое окно
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
-        alertDialog.setTitle("Введите название");
-
-        // Создаем поле ввода
-        EditText input = new EditText(getApplicationContext());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        input.setLayoutParams(lp);
-        input.setHint("Введите название");
-        alertDialog.setView(input);
-
-
-        // Кнопка "Создать"
-        alertDialog.setPositiveButton("Создать", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                addToRecyclerView(new Note(1, input.getText().toString() ) );
-            }
-        });
-        // Кнопка "Отмена"
-        alertDialog.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-
-        // Показываем диалоговое окно
-        alertDialog.show();
+        return super.onOptionsItemSelected(item);
     }
 
     private void setUpRecyclerView() {
         recyclerView = findViewById(R.id.rcView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SecondActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new NotesAdapter( getBaseContext(), notes );
+        adapter = new NotesAdapter(getBaseContext(), notes);
         recyclerView.setAdapter(adapter);
     }
 
     private void addToRecyclerView(Note note) {
         adapter.addItem(note);
     }
-
 }
 
 

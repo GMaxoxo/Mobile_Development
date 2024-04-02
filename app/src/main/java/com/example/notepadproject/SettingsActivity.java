@@ -32,43 +32,39 @@ public class SettingsActivity extends AppCompatActivity {
         // Меню навигации
         setUpBottomNavBar();
 
-      //  setOnClickListeners();
+         setOnClickListeners();
     }
 
-    private void init(){
+    private void init() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        btnLogOut = findViewById(R.id.btnLogOut);
     }
 
- /*   private void setOnClickListeners() {
+   private void setOnClickListeners() {
         btnLogOut.setOnClickListener((v -> {
             //todo log out from firebase account
         }));
     }
-*/
+
 
     // Метод навигации
-    private void setUpBottomNavBar(){
+    private void setUpBottomNavBar() {
+        bottomNavigationView.setBackground(null);
         bottomNavigationView.setSelectedItemId(R.id.miSettings); //  выбор кнопки
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 // Обработчик нажатий кнопок
 
-                if (menuItem.getItemId() == R.id.miGroup) {
-
-                }
-
-                if (menuItem.getItemId() == R.id.miAdd) {
-
-                }
-
-                if (menuItem.getItemId() == R.id.miHome){
-                    startActivity(new Intent( SettingsActivity.this,SecondActivity.class));
+                if (menuItem.getItemId() == R.id.miHome) {
+                    startActivity(new Intent(SettingsActivity.this, SecondActivity.class));
                     overridePendingTransition(0, 0); // Убирает анимки
                     finish();
                 }
-                return true;
 
+                if (menuItem.getItemId() == R.id.miGroup) {
+                }
+                return true;
 
             }
         });

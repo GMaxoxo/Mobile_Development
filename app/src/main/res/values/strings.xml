@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NotePadProject</string>
+    <string name="app_name">My Application</string>
     <string name="inputLoginAndPassword">Введите логин и пароль</string>
     <string name="inputLoginHint">Введите логин</string>
     <string name="inputPasswordHint">Введите пароль</string>
@@ -12,10 +12,14 @@
     <string name="itemSettings">Настройки</string>
 
     <string name="activityMainLabel">Вход</string>
-    <string name="activitySecondLabel">Мои ззаметки</string>
+    <string name="activitySecondLabel">Мои заметки</string>
     <string name="activitySettingLabel">Настройки</string>
 
     <string name="LogOut">Выйти из аккаунта</string>
+    <string name="itemPermit">Подтвердить</string>
 
-
+    <string name="hintEtTitle">Введите название</string>
+    <string name="hintEtDescription">Введите содержимое</string>
+    <string name="rbPublic">Общая</string>
+    <string name="rbPrivate">Личная</string>
 </resources>
