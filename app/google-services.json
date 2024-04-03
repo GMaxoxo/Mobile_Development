@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "387730038695",
-    "project_id": "notepadproject-a603f",
-    "storage_bucket": "notepadproject-a603f.appspot.com"
+    "project_number": "1062326143504",
+    "firebase_url": "https://notes-cd275-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "notes-cd275",
+    "storage_bucket": "notes-cd275.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:387730038695:android:eea69ff60cfd41bbdae082",
+        "mobilesdk_app_id": "1:1062326143504:android:1cbb103ff2732270685895",
         "android_client_info": {
           "package_name": "com.example.notepadproject"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAGcOaOCpmQ5trSJ2ZLdrByPYNCQvdksKo"
+          "current_key": "AIzaSyC0s3Gwk7qMbH15RsZh08rbrEDVyh24wOE"
         }
       ],
       "services": {

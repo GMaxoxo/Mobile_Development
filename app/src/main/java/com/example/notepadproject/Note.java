@@ -2,20 +2,33 @@ package com.example.notepadproject;
 
 public class Note {
 
-   private int id;
+   private String id;
 
     private String title;
 
-public Note(int id, String title) {
+    private String description;
+
+public Note(
+        String id,
+        String title,
+        String description
+) {
+    if(id == null){
+        id = "";
+    }
     this.id = id;
     this.title = title;
+    this.description = description;
 }
 
-    public int getId() {
-        return this.id;
-    }
+public Note(){
 
-    public void setId(int id) {
+}
+
+    public String getId() {return id;}
+
+
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -25,5 +38,15 @@ public Note(int id, String title) {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

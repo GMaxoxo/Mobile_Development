@@ -2,6 +2,7 @@ package com.example.notepadproject;
 
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -30,6 +32,8 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(
+                new ColorDrawable(getResources().getColor(R.color.BackgroundElements)));
 
         // Инициализация
         init();
@@ -52,6 +56,7 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 // Обработчик нажатий кнопок
+
 
                 if (menuItem.getItemId() == R.id.miGroup) {
                 }

@@ -2,7 +2,9 @@ package com.example.notepadproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -24,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     // Метод Инициализации
     private void init() {
         inputLoginET = findViewById(R.id.inputLoginET);
@@ -52,50 +52,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Метод обработчика нажатий
-    private void setOnClickListeners(){
+    private void setOnClickListeners() {
         // Обработчк регистрации
         registrationBtn.setOnClickListener((v -> {
-            String email = inputLoginET.getText().toString();
-            String pass = inputPassET.getText().toString();
-            if (!email.isEmpty() && !pass.isEmpty()) {
-                mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener((it -> {
-                    if (it.isSuccessful()) {
-                        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Log.e("11", "ошибка");
+                    String email = inputLoginET.getText().toString();
+                    String pass = inputPassET.getText().toString();
+                    if (!email.isEmpty() && !pass.isEmpty()) {
+                        mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener((it -> {
+                            if (it.isSuccessful()) {
+                                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                                startActivity(intent);
+                                saveData();
+                                finish();
+                            } else {
+                                Log.e("11", "ошибка");
 
+                            }
+                        }));
+                    } else {
+                        Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show();
                     }
-                }));
-            } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show();
-            }
                 })
         );
         // Обработчк авторизации
         authorizationBtn.setOnClickListener((v -> {
-            String email = inputLoginET.getText().toString();
-            String pass = inputPassET.getText().toString();
-            if (!email.isEmpty() && !pass.isEmpty()) {
-                mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener((it -> {
-                    if (it.isSuccessful()) {
-                        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Log.e("11", "ошибка");
+                    String email = inputLoginET.getText().toString();
+                    String pass = inputPassET.getText().toString();
+                    if (!email.isEmpty() && !pass.isEmpty()) {
+                        mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener((it -> {
+                            if (it.isSuccessful()) {
+                                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                                startActivity(intent);
+                                loadData();
+                                finish();
+                            } else {
+                                Log.e("11", "ошибка");
 
+                            }
+                        }));
+                    } else {
+                        Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show();
                     }
-                }));
-            } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show();
-            }
                 })
         );
 
     }
 
+    private void saveData() {
+        String userId = mAuth.getUid();
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userId", userId);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("userId", null);
+        Log.e("11", userId);
+    }
 
     @Override
     public void onStart() {
