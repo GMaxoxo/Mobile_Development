@@ -1,6 +1,5 @@
 package com.example.notepadproject;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,11 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,11 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SecondActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener {
+public class PublicNotesActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener {
 
     //Меню навигации
     BottomNavigationView bottomNavigationView;
@@ -44,17 +40,15 @@ public class SecondActivity extends AppCompatActivity implements NotesAdapter.It
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
-        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(     // Дизайн Action bar'а
+        setContentView(R.layout.activity_public_notes);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(    // Дизайн Action bar'а
                 new ColorDrawable(getResources().getColor(R.color.BackgroundElements)));
 
-        // Инициализация
-        init();
+        // Инициализация.
+        init();    // метод инициализации
+        loadData();    // метод загрузки данных
 
-        loadData();
-
-        // Меню навигации
-        setUpBottomNavBar();
+        setUpBottomNavBar();    // метод навигации
 
         // список заметок
         setUpRecyclerView();
@@ -64,7 +58,7 @@ public class SecondActivity extends AppCompatActivity implements NotesAdapter.It
 
     }
 
-    // Метод инициализации
+    // Инициализация нижней панели навигации
     private void init() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
     }
@@ -72,22 +66,23 @@ public class SecondActivity extends AppCompatActivity implements NotesAdapter.It
     // Метод навигации
     private void setUpBottomNavBar() {
         bottomNavigationView.setBackground(null);
+        bottomNavigationView.setSelectedItemId(R.id.miGroup);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 // Обработчик нажатий кнопок
 
-                // Кнопка Group
-                if (menuItem.getItemId() == R.id.miGroup) {
-                    Intent intent = new Intent(SecondActivity.this, PublicNotesActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                // кнопка Home
+                if (menuItem.getItemId() == R.id.miHome) {
+                    Intent intent = new Intent(PublicNotesActivity.this, SecondActivity.class); // Открываем основное окно при нажатии
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);     // Убирает анимки
                     startActivity(intent);
                     finish();
                 }
-                // Кнопка Settings
+                // кнопка Settings
                 if (menuItem.getItemId() == R.id.miSettings) {
-                    Intent intent = new Intent(SecondActivity.this, SettingsActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Intent intent = new Intent(PublicNotesActivity.this, SettingsActivity.class); // Открываем окно настроек при нажатии
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);     // Убирает анимки
                     startActivity(intent);
                     finish();
                 } else {
@@ -99,14 +94,15 @@ public class SecondActivity extends AppCompatActivity implements NotesAdapter.It
         });
     }
 
-    // Взятие данных из БД
+    // Получение данных из Firebase
     public void getDataFromFirebase() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(userId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("public");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 notes.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    // Получаем данные и добавляем их в список
                     Note note = dataSnapshot.getValue(Note.class);
                     notes.add(note);
                 }
@@ -120,59 +116,59 @@ public class SecondActivity extends AppCompatActivity implements NotesAdapter.It
         });
     }
 
-
-    // Загрузка ID пользователя
     private void loadData() {
+        // Загружаем данные из SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", null);
         Log.e("11", userId);
     }
 
-    // Добавление заметки
+    //добавление заметки
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Настройка меню действий
         getMenuInflater().inflate(R.menu.notes_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    // Добавление заметки
+    //добавление заметки
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
+        // Кнопка "добавить"
         if (id == R.id.miAdd) {
-
+            // Открываем окно добавления при нажатии на кнопку "добавить"
             Intent intent = new Intent(this, NoteActivity.class);
-            intent.putExtra("publicMode", false);
+            intent.putExtra("publicMode", true);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // Список заметок
+    //список заметок
     private void setUpRecyclerView() {
         recyclerView = findViewById(R.id.rcView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SecondActivity.this);
+        // Настройка RecyclerView
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PublicNotesActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new NotesAdapter(getBaseContext(), notes);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
 
+    // Добавление элемента в RecyclerView
     private void addToRecyclerView(Note note) {
         adapter.addItem(note);
     }
 
-    // переход на заметку
     @Override
     public void onItemClick(View view, int position) {
-        Intent intent = new Intent(SecondActivity.this, NoteActivity.class);
+        // Обработка нажатия на элемент RecyclerView
+        Intent intent = new Intent(PublicNotesActivity.this, NoteActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("value", notes.get(position));
         intent.putExtras(bundle);
         startActivity(intent);
     }
 }
-
-
-

@@ -1,6 +1,5 @@
 package com.example.notepadproject;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +10,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -22,32 +21,48 @@ public class SettingsActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     // Кнопка в навигации
 
-
+    private FirebaseAuth mAuth;
     Button btnLogOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(    // Дизайн Action bar'а
                 new ColorDrawable(getResources().getColor(R.color.BackgroundElements)));
 
         // Инициализация
-        init();
+        init(); // метод инициализации
+
         // Меню навигации
         setUpBottomNavBar();
 
-         setOnClickListeners();
+        setOnClickListeners();
+
+
     }
 
     private void init() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         btnLogOut = findViewById(R.id.btnLogOut);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
-   private void setOnClickListeners() {
+    private void setOnClickListeners() {
         btnLogOut.setOnClickListener((v -> {
-            //todo log out from firebase account
+            mAuth.signOut(); // выход с аккаунта
+            mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    if (firebaseAuth.getCurrentUser() == null) {
+                        // переходим на окно регистрации
+                        Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish(); // Закрываем текущую активность
+                    }
+                }
+            });
         }));
     }
 
@@ -61,13 +76,19 @@ public class SettingsActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 // Обработчик нажатий кнопок
 
+                // Кнопка "Заметки"
                 if (menuItem.getItemId() == R.id.miHome) {
                     startActivity(new Intent(SettingsActivity.this, SecondActivity.class));
                     overridePendingTransition(0, 0); // Убирает анимки
                     finish();
                 }
 
+                // Кнопка "Общие"
                 if (menuItem.getItemId() == R.id.miGroup) {
+                    Intent intent = new Intent(SettingsActivity.this, PublicNotesActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
+                    finish();
                 }
                 return true;
 

@@ -20,11 +20,11 @@
             android:id="@+id/inputLoginAndPasswordTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Введите логин и пароль"
+            android:layout_margin="10dp"
+            android:text="@string/inputLoginAndPassword"
             android:textAlignment="center"
             android:textColor="@color/Text"
-            android:layout_margin="10dp"
-            android:textSize="20dp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/inputLoginET"
@@ -66,20 +66,20 @@
             android:id="@+id/authorizationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/BackgroundElements"
-            android:text="Авторизация"
-            android:textColor="@color/TextElements"
             android:layout_margin="5dp"
-            android:textSize="16dp" />
+            android:backgroundTint="@color/BackgroundElements"
+            android:text="@string/authBtn"
+            android:textColor="@color/TextElements"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/registrationBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/BackgroundElements"
-            android:text="Регистрация"
-            android:textColor="@color/TextElements"
             android:layout_margin="5dp"
-            android:textSize="16dp" />
+            android:backgroundTint="@color/BackgroundElements"
+            android:text="@string/regBtn"
+            android:textColor="@color/TextElements"
+            android:textSize="18sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

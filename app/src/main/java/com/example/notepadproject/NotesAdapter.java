@@ -13,10 +13,7 @@ import com.example.notepadproject.R;
 
 import java.util.List;
 
-/**
- * The `MyRecyclerViewAdapter` class is an adapter for populating a RecyclerView with a list of items.
- * It provides custom item views and handles item click events.
- */
+
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> implements View.OnClickListener {
 
     private LayoutInflater mInflater;
@@ -24,38 +21,23 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     private int adapterPosition;
     private List<Note> mData;
 
-    /**
-     * Constructs a new `MyRecyclerViewAdapter` with the provided context and data.
-     *
-     * @param context The context used for inflating views.
-     * @param data    The data to be displayed in the RecyclerView.
-     */
+
     public NotesAdapter(Context context, List<Note> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
 
-    /**
-     * Adds an item to the adapter's data.
-     *
-     * @param note The item (deck name) to be added to the data list.
-     */
+
     public void addItem(Note note) {
         this.mData.add(note);
     }
 
-    /**
-     * Sets the click listener for items in the RecyclerView.
-     *
-     * @param itemClickListener The click listener for item click events.
-     */
+
     public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    /**
-     * A ViewHolder for items in the RecyclerView. It holds references to the item's views and handles click events.
-     */
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvNumber;
         TextView tvTitle;
@@ -64,7 +46,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             super(itemView);
             tvNumber = itemView.findViewById(R.id.tvNumber);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            //itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -74,16 +56,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         }
     }
 
-    /**
-     * Interface for defining item click listener callbacks.
-     */
+
     public interface ItemClickListener {
-        /**
-         * Called when an item in the RecyclerView is clicked.
-         *
-         * @param view     The clicked view.
-         * @param position The position of the clicked item.
-         */
+
         void onItemClick(View view, int position);
     }
 

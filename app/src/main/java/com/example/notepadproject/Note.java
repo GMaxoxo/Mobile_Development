@@ -1,31 +1,35 @@
 package com.example.notepadproject;
 
-public class Note {
+import java.io.Serializable;
 
-   private String id;
+public class Note implements Serializable {
+
+    private String id;
 
     private String title;
 
     private String description;
 
-public Note(
-        String id,
-        String title,
-        String description
-) {
-    if(id == null){
-        id = "";
+    public Note(
+            String id,
+            String title,
+            String description
+    ) {
+        if (id == null) {
+            id = "";
+        }
+        this.id = id;
+        this.title = title;
+        this.description = description;
     }
-    this.id = id;
-    this.title = title;
-    this.description = description;
-}
 
-public Note(){
+    public Note() {
 
-}
+    }
 
-    public String getId() {return id;}
+    public String getId() {
+        return id;
+    }
 
 
     public void setId(String id) {
@@ -39,7 +43,6 @@ public Note(){
     public void setTitle(String title) {
         this.title = title;
     }
-
 
 
     public String getDescription() {

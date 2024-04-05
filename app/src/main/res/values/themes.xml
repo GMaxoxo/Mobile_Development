@@ -24,5 +24,9 @@
     <color name="StartGradientET">#FFFFFF</color>
     <color name="EndGradientET">#DFDFDF</color>
 
+
+    <color name="BackgroundNotes">#BEA4FF</color>
+    <color name="StrokeNote">#FFFFFF</color>
+
     <style name="Theme.NotePadProject" parent="Base.Theme.NotePadProject" />
 </resources>
